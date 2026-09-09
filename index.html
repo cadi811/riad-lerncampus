@@ -54,10 +54,435 @@ p{margin:0 0 12px}.lead{font-size:17px;line-height:1.65;color:var(--sub);max-wid
 .cram{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.cram .item{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0f151b}.cram .item b{display:block;margin-bottom:5px;color:white}.cram .item span{color:var(--sub)}
 @media(max-width:900px){.s4,.s5,.s6,.s7,.s8{grid-column:1/-1}.timeline{grid-template-columns:1fr}.flashcards{grid-template-columns:repeat(2,1fr)}.cram{grid-template-columns:1fr}.seq{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){#app{padding:16px 12px 108px}.topbar{align-items:flex-start}.status{display:none}h1{margin-top:30px}.factgrid{grid-template-columns:1fr}.flashcards{grid-template-columns:1fr}.nav button{font-size:8.5px}.nav button b{font-size:14px}.stageControl{display:block}.stageControl input{width:100%}.stageName{text-align:left;margin-top:5px}.lessonHead{display:block}.back{margin-bottom:13px}.term{display:block}.term b{display:block;margin-bottom:4px}.examTop{display:block}}
+
+/* Static-first fallback: visible in iOS/ChatGPT file preview even if scripts are blocked */
+#staticFallback{display:block}
+.js-ready #staticFallback{display:none}
+.staticHero{padding:18px 0 4px}
+.staticNav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.staticNav a{color:var(--text);text-decoration:none;border:1px solid var(--line);background:#121a22;padding:9px 12px;border-radius:9px;font-weight:700}
+.staticPhaseList{display:grid;gap:10px}
+.static-chapter{margin-top:18px}
+.static-phase{border:1px solid var(--line);border-radius:13px;background:var(--panel);overflow:hidden}
+.static-phase summary{list-style:none;display:flex;gap:13px;align-items:flex-start;padding:15px;cursor:pointer}
+.static-phase summary::-webkit-details-marker{display:none}
+.static-phase summary b{display:block;font-size:16px}
+.static-phase summary small{display:block;color:var(--muted);margin-top:4px;line-height:1.45}
+.static-phase[open] summary{border-bottom:1px solid var(--line);background:#151d25}
+.static-detail{padding:16px}
+.static-detail h3{margin-top:22px}
+.card.compact{padding:12px}
+.memory{margin-top:14px;padding:12px;border:1px dashed #35657b;border-radius:10px;background:rgba(89,186,229,.06);color:var(--sub)}
+.cssBuild{height:360px;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),#080d12;background-size:28px 28px}
+.cssBuild .ground{position:absolute;left:0;right:0;bottom:0;height:80px;background:#352f28;border-top:2px solid #665e51}
+.cssBuild .foundation{position:absolute;left:23%;right:23%;bottom:55px;height:25px;background:#77838d;animation:buildFound 10s infinite}
+.cssBuild .slab{position:absolute;left:21%;right:21%;bottom:80px;height:15px;background:#98a2aa;animation:buildSlab 10s infinite}
+.cssBuild .wall{position:absolute;width:18px;background:#8e989f;bottom:95px;height:92px;animation:buildWalls 10s infinite}
+.cssBuild .wallL{left:23%}.cssBuild .wallR{right:23%}.cssBuild .floor{position:absolute;left:23%;right:23%;height:13px;background:#909ba3;animation:buildFloor 10s infinite}
+.cssBuild .floor1{bottom:187px}.cssBuild .wallL2,.cssBuild .wallR2{bottom:200px;height:83px;animation-delay:.2s}.cssBuild .wallL2{left:23%}.cssBuild .wallR2{right:23%}.cssBuild .floor2{bottom:283px}
+.cssBuild .roof{position:absolute;bottom:292px;width:29%;height:10px;background:#9ba4ab;transform-origin:center;animation:buildRoof 10s infinite}.cssBuild .roofL{left:22%;transform:rotate(-19deg)}.cssBuild .roofR{right:22%;transform:rotate(19deg)}
+.cssBuild .pipe{position:absolute;opacity:0;animation:pipesIn 10s infinite}.cssBuild .pipeCold{left:39%;bottom:95px;width:5px;height:145px;background:#56b9e8;box-shadow:70px -42px 0 -1px #56b9e8}.cssBuild .pipeWaste{left:54%;bottom:93px;width:8px;height:116px;background:#98a4ad}
+.cssBuild .fixture{position:absolute;left:56%;bottom:100px;width:36px;height:25px;border-radius:4px 4px 15px 15px;background:#edf2f5;opacity:0;animation:fixtureIn 10s infinite}
+.buildCaption{position:absolute;left:14px;right:14px;top:14px;color:#b9c5ce;font-size:12px;letter-spacing:.03em}
+.staticNote{margin-top:10px}
+@keyframes buildFound{0%,12%{opacity:0;transform:translateY(24px)}18%,100%{opacity:1;transform:none}}
+@keyframes buildSlab{0%,22%{opacity:0;transform:scaleX(.2)}30%,100%{opacity:1;transform:scaleX(1)}}
+@keyframes buildWalls{0%,32%{opacity:0;height:0}43%,100%{opacity:1;height:92px}}
+@keyframes buildFloor{0%,42%{opacity:0;transform:scaleX(.2)}50%,100%{opacity:1;transform:scaleX(1)}}
+@keyframes buildRoof{0%,55%{opacity:0}64%,100%{opacity:1}}
+@keyframes pipesIn{0%,67%{opacity:0}74%,100%{opacity:1}}
+@keyframes fixtureIn{0%,80%{opacity:0;transform:translateY(10px)}88%,100%{opacity:1;transform:none}}
+
 </style>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+<div id="staticFallback">
+  <div class="topbar">
+    <div class="brand">Hausbau A–Z<small>Gebäudetechnikplanung Sanitär EFZ · Prüfungsvorbereitung</small></div>
+    <div class="status"><span class="badge">BBZ Zürich</span><span class="badge">iPhone-kompatible Basisansicht</span></div>
+  </div>
+
+  <section class="staticHero">
+    <div class="kicker">Prüfungstrainer Hausbau</div>
+    <h1>Vom Grundstück bis zur Übergabe.</h1>
+    <p class="lead">Hier siehst du den Lernstoff auch dann vollständig, wenn die iPhone-Dateivorschau JavaScript blockiert. Jede Bauphase erklärt <b>was passiert, warum es passiert und was die Sanitärplanung dabei beachten muss.</b></p>
+    <div class="staticNav">
+      <a href="#ablauf">Bauphasen</a>
+      <a href="#animation">Animation</a>
+      <a href="#merkschema">Merkschema</a>
+      <a href="#begriffe">Begriffe</a>
+    </div>
+  </section>
+
+  <section id="animation">
+    <h2>Bauablauf – animiert</h2>
+    <div class="cssBuild">
+      <div class="ground"></div>
+      <div class="foundation"></div>
+      <div class="slab"></div>
+      <div class="wall wallL"></div><div class="wall wallR"></div>
+      <div class="floor floor1"></div>
+      <div class="wall wallL2"></div><div class="wall wallR2"></div>
+      <div class="floor floor2"></div>
+      <div class="roof roofL"></div><div class="roof roofR"></div>
+      <div class="pipe pipeCold"></div><div class="pipe pipeWaste"></div>
+      <div class="fixture"></div>
+      <div class="buildCaption">Grundstück → Aushub → Fundation → Rohbau → Technik → Ausbau</div>
+    </div>
+    <p class="muted staticNote">Diese CSS-Animation läuft ohne JavaScript. Sie ist bewusst schematisch und zeigt die Bauabfolge, nicht normative Ausführungsdetails.</p>
+  </section>
+
+  <section id="merkschema">
+    <h2>Der rote Faden</h2>
+    <div class="grid">
+      <div class="card s4"><div class="kicker">1 · Planung</div><p>Bedürfnisse → Grundstück → Vermessung → Koordination → Ausführungsplanung.</p></div>
+      <div class="card s4"><div class="kicker">2 · Unter Terrain</div><p>Absteckung → Aushub → Planum → Grundleitungen → Fundation → Bodenplatte.</p></div>
+      <div class="card s4"><div class="kicker">3 · Rohbau</div><p>Keller → Wände/Stützen → Decken → Dach → Gebäudehülle.</p></div>
+      <div class="card s4"><div class="kicker">4 · Technik</div><p>Rohinstallation → Schächte/Vorwände → Anschlüsse kontrollieren.</p></div>
+      <div class="card s4"><div class="kicker">5 · Ausbau</div><p>Bodenaufbau/Oberflächen → Sanitär-Endmontage → Umgebung.</p></div>
+      <div class="card s4"><div class="kicker">6 · Abschluss</div><p>Prüfung → Inbetriebnahme → Revisionsunterlagen → Übergabe/Betrieb.</p></div>
+    </div>
+  </section>
+
+  <section id="ablauf">
+    <h2>Alle 24 Bauphasen – detailliert</h2>
+    <p class="lead">Tippe eine Phase an. Diese Aufklappfelder funktionieren auch ohne die JavaScript-App.</p>
+    <div class="staticPhaseList"><div class="chapter static-chapter">A · Planung</div>
+    <details class="static-phase" open>
+      <summary><span class="num">01</span><span><b>Projektstart &amp; Bedürfnisse</b><small>Was soll gebaut werden – und was muss das Gebäude leisten?</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Ganz am Anfang wird noch nicht gebaut. Zuerst wird geklärt, wofür das Gebäude gebraucht wird, welche Räume nötig sind und welche technischen Anlagen dazugehören.</div>
+        <h3>Warum?</h3><p>Wer Anforderungen zu spät klärt, muss später Pläne ändern. Das kostet Zeit, Geld und kann zu Konflikten zwischen Architektur, Tragwerk und Gebäudetechnik führen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Bedürfnisse der Bauherrschaft erfassen: Nutzung, Räume, Komfort und technische Anforderungen.</li><li>Zuständigkeiten zwischen Architektur, Tragwerk und Fachplanungen klären.</li><li>Früh groben Platzbedarf für Technikräume, Schächte und Leitungswege reservieren.</li><li>Offene Punkte dokumentieren und im Projektteam abstimmen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Bauherrschaft</b><span>Auftraggeberin bzw. Auftraggeber des Bauprojekts.</span></div><div class="term"><b>Nutzung</b><span>Art, wie ein Gebäude oder Raum verwendet wird.</span></div><div class="term"><b>Schnittstelle</b><span>Punkt, an dem zwei Gewerke oder Bauteile zusammenpassen müssen.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Sanitärplanung beginnt nicht erst beim Rohr. Bereits hier wird über Nassräume, Technikraum, Schächte, Wasseranschluss, Entwässerung und Zugänglichkeit nachgedacht.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum beginnt die Sanitärplanung schon in der frühen Projektphase?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Zu glauben, man könne zuerst Architektur und Rohbau fertig planen und die Leitungen später einfach irgendwo einzeichnen.</div>
+        <div class="memory"><b>Merksatz:</b> Erst Anforderungen klären – dann planen – dann bauen.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">02</span><span><b>Grundstück &amp; Grundlagen</b><small>Terrain, Lage, Zufahrt, Erschliessung und vorhandene Leitungen verstehen.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Bevor ein Haus geplant wird, muss man das Grundstück kennen. Wichtig sind die Geländeform, Höhen, Zufahrt und bestehende Anschlüsse.</div>
+        <h3>Warum?</h3><p>Das Grundstück bestimmt, wo das Gebäude stehen kann und wie Wasser, Abwasser und andere Medien zum Gebäude geführt werden.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Grundstücksplan, Lageplan und vorhandene Projektgrundlagen beschaffen.</li><li>Terrain und Höhenverhältnisse beurteilen.</li><li>Zufahrt, Nachbargebäude und mögliche Einschränkungen beachten.</li><li>Vorhandene Werkleitungen und Anschlusspunkte prüfen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Terrain</b><span>Bestehende oder geplante Geländeoberfläche.</span></div><div class="term"><b>Erschliessung</b><span>Anbindung des Grundstücks an Strasse sowie Versorgungs- und Entsorgungsnetze.</span></div><div class="term"><b>Werkleitung</b><span>Leitung ausserhalb des Gebäudes, z. B. Wasser oder Abwasser.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Für Sanitär sind besonders der Trinkwasseranschluss, der Entwässerungsanschluss und die Höhenlage der Leitungen wichtig.</div>
+        <h3>Prüfungsfrage</h3><p><b>Nenne drei Angaben zum Grundstück, die für die Gebäudetechnik wichtig sind.</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Leitungen dort einzeichnen, wo sie praktisch wären, ohne die echten Anschlusslagen zu prüfen.</div>
+        <div class="memory"><b>Merksatz:</b> Das Grundstück gibt Lage, Höhe und Anschlusspunkte vor.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">03</span><span><b>Vermessung &amp; Geometer</b><small>Aus dem realen Grundstück werden verlässliche Lage- und Höhendaten.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Der Geometer misst die Wirklichkeit so genau, dass Planung und Bau auf eindeutige Punkte und Höhen bezogen werden können.</div>
+        <h3>Warum?</h3><p>Ein Grundriss kann geometrisch richtig aussehen und trotzdem in der Realität falsch liegen. Verlässliche Fixpunkte verhindern solche Fehler.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Relevante Lagepunkte und Höhen werden vermessen bzw. aus bestehenden Daten übernommen.</li><li>Fixpunkte und Höhenbezüge werden festgelegt.</li><li>Planung arbeitet mit diesen eindeutigen Bezugspunkten.</li><li>Später wird die geplante Gebäudelage auf dem Grundstück abgesteckt.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Fixpunkt</b><span>Stabiler Bezugspunkt für Lage oder Höhe.</span></div><div class="term"><b>Höhenkote</b><span>Angabe einer Höhe bezogen auf einen definierten Bezug.</span></div><div class="term"><b>Absteckung</b><span>Übertragen geplanter Punkte und Achsen in die Realität.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Bei Entwässerungsleitungen sind Höhen besonders wichtig. Eine Leitung kann im Grundriss richtig liegen und trotzdem auf falscher Höhe liegen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum braucht ein Sanitärplaner neben dem Grundriss auch Höhenangaben?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Lage und Höhe verwechseln.</div>
+        <div class="memory"><b>Merksatz:</b> Grundriss sagt wo – Höhe sagt auf welcher Ebene.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">04</span><span><b>Vorprojekt &amp; Koordination</b><small>Architektur, Tragwerk und Gebäudetechnik werden räumlich aufeinander abgestimmt.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Im Vorprojekt bekommt das Gebäude seine Form. Jetzt wird entschieden, wo Räume, Schächte, Technikbereiche und wichtige Leitungswege liegen.</div>
+        <h3>Warum?</h3><p>Je früher Platzkonflikte erkannt werden, desto einfacher lassen sie sich lösen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Grundrisse, Schnitte und Ansichten weiterentwickeln.</li><li>Tragwerk und Fachplanungen melden ihren Platzbedarf.</li><li>Technikräume, Schächte und Haupttrassen koordinieren.</li><li>Nassräume und vertikale Leitungsachsen über mehrere Geschosse vergleichen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Grundriss</b><span>Horizontale Darstellung eines Geschosses.</span></div><div class="term"><b>Schnitt</b><span>Vertikale Darstellung durch das Gebäude.</span></div><div class="term"><b>Schacht</b><span>Vertikaler Raum für technische Installationen.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Übereinander angeordnete Nassräume und gut platzierte Schächte können Leitungswege vereinfachen. Entscheidend ist aber immer die Gesamtkoordination des Projekts.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum muss man Sanitärräume nicht nur im Grundriss, sondern auch geschossübergreifend betrachten?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Jedes Geschoss getrennt planen.</div>
+        <div class="memory"><b>Merksatz:</b> Grundriss + Schnitt + mehrere Geschosse zusammen denken.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">05</span><span><b>Bewilligung &amp; Ausführungsplanung</b><small>Aus dem Entwurf werden koordinierte Unterlagen für die Realisierung.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Bevor gebaut wird, muss die Planung weit genug entwickelt sein. Wichtige Durchbrüche, Anschlüsse und Leitungswege werden festgelegt.</div>
+        <h3>Warum?</h3><p>Was später in Beton, Wänden oder Decken liegt, muss früh bekannt sein.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Projektunterlagen vervollständigen und koordinieren.</li><li>Erforderliche Bewilligungen und projektspezifische Vorgaben berücksichtigen.</li><li>Ausführungspläne erstellen.</li><li>Durchbrüche, Aussparungen, Einlagen und Anschlusspunkte prüfen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Ausführungsplan</b><span>Plan mit Informationen für die konkrete Bauausführung.</span></div><div class="term"><b>Aussparung</b><span>Geplanter freier Bereich in einem Bauteil.</span></div><div class="term"><b>Durchbruch</b><span>Geplante Öffnung durch Wand oder Decke.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Steigleitungen, Fallleitungen und Hauseinführungen benötigen passende Öffnungen. Diese sollten nicht erst auf der Baustelle spontan entstehen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum müssen Durchbrüche vor dem Erstellen eines Bauteils koordiniert werden?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Nachträgliches Bohren als normale Planungsmethode betrachten.</div>
+        <div class="memory"><b>Merksatz:</b> Was durch Beton muss, muss vorher bekannt sein.</div>
+      </div>
+    </details><div class="chapter static-chapter">B · Baustart &amp; Erdarbeiten</div>
+    <details class="static-phase" >
+      <summary><span class="num">06</span><span><b>Baustelleneinrichtung</b><small>Die Baustelle wird organisiert, erschlossen und sicher vorbereitet.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Bevor der eigentliche Bau beginnt, braucht die Baustelle Zufahrten, Lagerflächen, Geräte, provisorische Anschlüsse und eine klare Organisation.</div>
+        <h3>Warum?</h3><p>Gute Planung funktioniert nur, wenn Materialien und Personen sicher und zur richtigen Zeit an den richtigen Ort kommen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Zufahrt und Arbeitsbereiche festlegen.</li><li>Lagerflächen und Gerätepositionen planen.</li><li>Provisorische Versorgung und Entsorgung organisieren.</li><li>Sicherheits- und Logistikabläufe abstimmen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Baustelleneinrichtung</b><span>Temporäre Infrastruktur der Baustelle.</span></div><div class="term"><b>Bauinstallation</b><span>Provisorische Einrichtungen für den Baustellenbetrieb.</span></div><div class="term"><b>Logistik</b><span>Organisation von Material-, Geräte- und Personenbewegungen.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Auch Fachplaner müssen verstehen, ob vorgesehene Komponenten überhaupt transportiert, eingebracht und montiert werden können.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum kann Baustellenlogistik für die Fachplanung relevant sein?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Nur an den fertigen Zustand denken.</div>
+        <div class="memory"><b>Merksatz:</b> Planung muss auch montierbar sein.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">07</span><span><b>Absteckung</b><small>Die geplante Gebäudelage wird in die Realität übertragen.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Nun wird auf dem Grundstück markiert, wo das Gebäude wirklich stehen soll.</div>
+        <h3>Warum?</h3><p>Der Aushub und alle folgenden Arbeiten brauchen eindeutige Achsen, Ecken und Höhen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Gebäudeachsen bzw. relevante Punkte aus dem Plan übertragen.</li><li>Kontrollmasse prüfen.</li><li>Höhenbezüge festlegen.</li><li>Ausführung an den Referenzen ausrichten.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Gebäudeachse</b><span>Geometrische Bezugslinie für Planung und Ausführung.</span></div><div class="term"><b>Flucht</b><span>Geradlinige Ausrichtung von Bauteilen oder Punkten.</span></div><div class="term"><b>Schnurgerüst</b><span>Mögliche Hilfskonstruktion zur Übertragung von Achsen.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Hauseinführungen und Aussenleitungen müssen zur tatsächlich abgesteckten Gebäudelage passen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Was bedeutet Absteckung?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Absteckung mit Aushub verwechseln.</div>
+        <div class="memory"><b>Merksatz:</b> Abstecken = Plan auf das Grundstück übertragen.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">08</span><span><b>Aushub &amp; Baugrube</b><small>Der Boden wird für Untergeschoss, Fundation und unterirdische Leitungen entfernt.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Jetzt wird Erdmaterial entfernt. So entsteht der Raum für alles, was unter dem späteren Gelände liegt.</div>
+        <h3>Warum?</h3><p>Ohne Baugrube können Fundation, Keller, Bodenplatte und viele unterirdische Leitungen nicht erstellt werden.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Erdmaterial entsprechend dem Bauablauf abtragen.</li><li>Baugrube auf die vorgesehenen Höhen bringen.</li><li>Baugrube fachgerecht sichern.</li><li>Wasserverhältnisse und Zugänglichkeit berücksichtigen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Aushub</b><span>Entfernen von Erdmaterial.</span></div><div class="term"><b>Baugrube</b><span>Ausgehobener Bereich für unterirdische Bauteile.</span></div><div class="term"><b>Baugrubensicherung</b><span>Massnahmen zur Stabilisierung der Baugrube.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Grundleitungen und Hauseinführungen werden jetzt besonders wichtig, weil viele davon später kaum noch zugänglich sind.</div>
+        <h3>Prüfungsfrage</h3><p><b>Welche Bauteile und Leitungen werden durch den Aushub überhaupt erst möglich?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Baugrube nur als &#x27;Loch&#x27; betrachten und Höhen sowie Sicherung vergessen.</div>
+        <div class="memory"><b>Merksatz:</b> Aushub schafft Raum für alles unter Terrain.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">09</span><span><b>Planum &amp; Unterbau</b><small>Der Untergrund wird für die tragenden Bauteile vorbereitet.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Der Boden der Baugrube wird auf die richtige Höhe und Qualität gebracht, damit darauf weitergebaut werden kann.</div>
+        <h3>Warum?</h3><p>Eine ungenaue oder ungeeignete Grundlage kann spätere Bauteile beeinflussen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Planum auf Sollhöhe herstellen.</li><li>Untergrund kontrollieren.</li><li>Je nach Konstruktion Unterbau- oder Sauberkeitsschichten herstellen.</li><li>Einlagen und Leitungsdurchführungen erneut koordinieren.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Planum</b><span>Geplante hergestellte Oberfläche des Untergrunds.</span></div><div class="term"><b>Unterbau</b><span>Schichten unter dem eigentlichen tragenden Bauteil.</span></div><div class="term"><b>Sauberkeitsschicht</b><span>Hilfsschicht für eine saubere, definierte Arbeitsfläche.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Alles, was unter der Bodenplatte liegt, muss jetzt eindeutig in Lage und Höhe bekannt sein.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum ist diese Phase für unterirdische Leitungen kritisch?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Nur die sichtbaren Bauteile des Hauses beachten.</div>
+        <div class="memory"><b>Merksatz:</b> Vor der Bodenplatte muss unten alles stimmen.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">10</span><span><b>Werkleitungen &amp; Grundleitungen</b><small>Unterirdische Ver- und Entsorgungswege werden hergestellt.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Jetzt werden Leitungen gebaut, die später unter dem Gebäude oder im Erdreich liegen.</div>
+        <h3>Warum?</h3><p>Diese Leitungen sind nach Fertigstellung schwer zugänglich. Fehler in Lage oder Höhe sind später aufwendig.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Trassen und Höhen gemäss Planung festlegen.</li><li>Leitungen in koordinierter Lage herstellen.</li><li>Anschlüsse und Gebäudeeinführungen vorbereiten.</li><li>Vor dem Überdecken Lage und Ausführung kontrollieren.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Grundleitung</b><span>Entwässerungsleitung im Erdreich oder unter der Bodenplatte.</span></div><div class="term"><b>Hauseinführung</b><span>Stelle, an der eine Versorgung in das Gebäude geführt wird.</span></div><div class="term"><b>Trasse</b><span>Geplanter räumlicher Verlauf einer Leitung.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Bei Entwässerung muss die Höhenführung funktionieren. Nur die Linie im Grundriss genügt nicht.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum ist eine falsche Höhe bei einer Grundleitung besonders problematisch?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Lage prüfen, aber Höhe vergessen.</div>
+        <div class="memory"><b>Merksatz:</b> Unterirdisch: Lage + Höhe + Anschluss prüfen.</div>
+      </div>
+    </details><div class="chapter static-chapter">C · Fundation &amp; Rohbau</div>
+    <details class="static-phase" >
+      <summary><span class="num">11</span><span><b>Fundation</b><small>Die Lasten des Gebäudes werden sicher in den Baugrund übertragen.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Fundamente bilden die Verbindung zwischen Gebäude und Boden. Sie sorgen dafür, dass die Lasten kontrolliert in den Baugrund gelangen.</div>
+        <h3>Warum?</h3><p>Ein Gebäude braucht eine tragfähige Basis.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Fundationsart gemäss Tragwerks- und Baugrundplanung festlegen.</li><li>Schalung und Bewehrung vorbereiten.</li><li>Notwendige Einlagen und Durchführungen koordinieren.</li><li>Betonbauteile herstellen und kontrollieren.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Fundation</b><span>Bauteile zur Übertragung von Gebäudelasten in den Baugrund.</span></div><div class="term"><b>Fundament</b><span>Teil der Fundation unter Wänden, Stützen oder anderen Lasten.</span></div><div class="term"><b>Bewehrung</b><span>Stahleinlagen im Stahlbeton.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Leitungsdurchführungen durch tragende Bereiche dürfen nicht ungeplant erfolgen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Welche Hauptaufgabe hat die Fundation?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Fundament und Bodenplatte immer als dasselbe ansehen.</div>
+        <div class="memory"><b>Merksatz:</b> Fundation = Lasten sicher in den Baugrund.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">12</span><span><b>Bodenplatte</b><small>Die unterste flächige Ebene des Gebäudes entsteht.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Die Bodenplatte bildet die Basis des Gebäudes. Vor dem Betonieren muss geprüft sein, ob alle vorgesehenen Einlagen und Durchführungen richtig liegen.</div>
+        <h3>Warum?</h3><p>Nach dem Betonieren sind Korrekturen viel schwieriger.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Schalung und Bewehrung vorbereiten.</li><li>Einlagen, Hülsen und Durchführungen kontrollieren.</li><li>Anschlusspunkte mit den Fachplanungen vergleichen.</li><li>Betonieren und Bauteil aushärten lassen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Bodenplatte</b><span>Flächiges Bauteil am Gebäudesockel.</span></div><div class="term"><b>Einlage</b><span>Vor dem Betonieren eingebautes Element.</span></div><div class="term"><b>Abdichtung</b><span>Schutz gegen unerwünschten Wassereintritt entsprechend Konstruktion.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Hauseinführungen, Entwässerungsanschlüsse und geplante Durchführungen müssen an der richtigen Stelle liegen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Was muss vor dem Betonieren aus Sicht Gebäudetechnik kontrolliert werden?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Anschlüsse erst nach dem Betonieren genau festlegen.</div>
+        <div class="memory"><b>Merksatz:</b> Vor Beton: Einlagen und Durchführungen kontrollieren.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">13</span><span><b>Untergeschoss / Keller</b><small>Technikräume, Wände, Stützen und erste vertikale Leitungszonen entstehen.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Der Rohbau wird sichtbar. Im Untergeschoss liegen häufig Technikräume und wichtige Verteilungen.</div>
+        <h3>Warum?</h3><p>Hier treffen viele Systeme zusammen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Wände und Stützen gemäss Tragwerksplanung erstellen.</li><li>Technikräume und Schächte freihalten.</li><li>Öffnungen und Durchbrüche prüfen.</li><li>Erdberührte Bauteile und Abdichtungen gemäss Konstruktion ausführen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Tragwand</b><span>Wand, die Lasten aufnimmt.</span></div><div class="term"><b>Technikraum</b><span>Raum für gebäudetechnische Anlagen.</span></div><div class="term"><b>Installationszone</b><span>Vorgesehener Raum für Leitungen und Komponenten.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Technikraum und Schächte brauchen nicht nur Gerätefläche, sondern auch Leitungsanschlüsse, Bedienung und Wartungszugang.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum darf der Technikraum keine beliebige Restfläche sein?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Nur Geräteabmessungen berücksichtigen.</div>
+        <div class="memory"><b>Merksatz:</b> Technik braucht Platz zum Anschliessen, Bedienen und Warten.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">14</span><span><b>Wände, Stützen &amp; weitere Geschosse</b><small>Das Gebäude wächst Geschoss für Geschoss.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Jetzt werden die tragenden und raumbildenden Bauteile erstellt. Gleichzeitig müssen Installationszonen frei bleiben.</div>
+        <h3>Warum?</h3><p>Leitungen teilen sich den Raum mit Tragwerk, Türen, Decken und anderen Gewerken.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Wände und Stützen nach Achsen erstellen.</li><li>Öffnungen und Installationszonen beachten.</li><li>Leitungswege mit Tragwerk und Architektur vergleichen.</li><li>Geschosse wiederholt miteinander koordinieren.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Rohbau</b><span>Konstruktive Grundstruktur des Gebäudes.</span></div><div class="term"><b>Stütze</b><span>Vertikales tragendes Bauteil.</span></div><div class="term"><b>Kollision</b><span>Räumlicher Konflikt zwischen zwei Bauteilen oder Systemen.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Ein Rohr kann im Grundriss passen und trotzdem mit einem Unterzug, einer Stütze oder einer Tür kollidieren.</div>
+        <h3>Prüfungsfrage</h3><p><b>Nenne zwei typische Konflikte zwischen Sanitärinstallation und Rohbau.</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Nur zweidimensional planen.</div>
+        <div class="memory"><b>Merksatz:</b> Leitung immer räumlich prüfen: X, Y und Höhe.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">15</span><span><b>Geschossdecken</b><small>Horizontale Tragflächen verbinden die Geschosse.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Decken trennen Geschosse. Für vertikale Leitungen müssen passende Öffnungen vorhanden sein.</div>
+        <h3>Warum?</h3><p>Fehler bei Deckendurchbrüchen können sich über mehrere Geschosse fortsetzen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Schalung und Bewehrung vorbereiten.</li><li>Durchbrüche, Aussparungen und Einlagen kontrollieren.</li><li>Vertikale Leitungsachsen über mehrere Geschosse vergleichen.</li><li>Decke erstellen und Öffnungen für die nächsten Schritte sichern.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Decke</b><span>Horizontales Bauteil zwischen Geschossen.</span></div><div class="term"><b>Deckendurchbruch</b><span>Geplante Öffnung durch die Decke.</span></div><div class="term"><b>Schalung</b><span>Temporäre Form für Frischbeton.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Fallleitungen und Steigleitungen brauchen durchgehende, koordinierte Vertikalzonen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum muss eine Fallleitung über mehrere Geschosse kontrolliert werden?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Geschossweise isoliert planen.</div>
+        <div class="memory"><b>Merksatz:</b> Vertikale Leitung = alle Geschosse gemeinsam prüfen.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">16</span><span><b>Dach</b><small>Das Gebäude erhält seinen oberen Abschluss.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Das Dach schützt das Gebäude. Gleichzeitig muss Niederschlagswasser kontrolliert abgeführt werden.</div>
+        <h3>Warum?</h3><p>Dach und Gebäudetechnik haben direkte Schnittstellen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Dachtragwerk erstellen.</li><li>Dachaufbau ausführen.</li><li>Durchdringungen koordinieren.</li><li>Dachentwässerung und Anschlüsse berücksichtigen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Dachentwässerung</b><span>System zur Ableitung von Niederschlagswasser.</span></div><div class="term"><b>Dachdurchdringung</b><span>Öffnung durch Dachschichten.</span></div><div class="term"><b>Gefälle</b><span>Höhenänderung über eine Strecke.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Regenwasserleitungen und Lüftungsführungen über Dach sind typische Sanitärschnittstellen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Welche Sanitärsysteme können das Dach direkt betreffen?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Das Dach nur als Thema von Zimmermann oder Dachdecker betrachten.</div>
+        <div class="memory"><b>Merksatz:</b> Auch das Dach hat Sanitärschnittstellen.</div>
+      </div>
+    </details><div class="chapter static-chapter">D · Gebäudehülle &amp; Ausbau</div>
+    <details class="static-phase" >
+      <summary><span class="num">17</span><span><b>Fenster, Fassade &amp; Gebäudehülle</b><small>Das Gebäude wird gegen Aussen geschlossen.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Fenster, Fassade und weitere Schichten trennen Innen und Aussen. Durchdringungen müssen sorgfältig geplant sein.</div>
+        <h3>Warum?</h3><p>Die Hülle soll Witterung fernhalten und bauphysikalisch funktionieren.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Fenster und Aussentüren einbauen.</li><li>Fassaden- und Dämmschichten ergänzen.</li><li>Anschlussdetails ausbilden.</li><li>Technische Durchdringungen mit der Hülle koordinieren.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Gebäudehülle</b><span>Bauteile, die Innenräume gegen aussen abgrenzen.</span></div><div class="term"><b>Wärmedämmung</b><span>Schicht zur Verringerung des Wärmedurchgangs.</span></div><div class="term"><b>Anschlussdetail</b><span>Konstruktive Verbindung zwischen verschiedenen Bauteilen.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Leitungsdurchführungen durch die Gebäudehülle müssen mit Abdichtung und Bauphysik zusammenpassen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum sind Durchdringungen durch die Gebäudehülle sensibel?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Nur das Rohr, nicht die Hülle betrachten.</div>
+        <div class="memory"><b>Merksatz:</b> Durchdringung = Leitung + dichter Bauanschluss.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">18</span><span><b>Rohinstallation Gebäudetechnik</b><small>Leitungsnetze werden im Rohbau realisiert.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Jetzt werden die geplanten Leitungswege tatsächlich gebaut. Die Installation ist noch nicht fertig sichtbar, aber das technische Netz entsteht.</div>
+        <h3>Warum?</h3><p>Hier zeigt sich, ob Planung und Rohbau wirklich zusammenpassen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Haupttrassen und Steigzonen umsetzen.</li><li>Kaltwasser, Warmwasser, Entwässerung und weitere Systeme koordinieren.</li><li>Anschlusspunkte für Apparate vorbereiten.</li><li>Abweichungen zwischen Planung und Baustelle klären.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Steigzone</b><span>Vertikaler Installationsbereich.</span></div><div class="term"><b>Rohinstallation</b><span>Leitungen und technische Komponenten vor der Endmontage.</span></div><div class="term"><b>Anschlusspunkt</b><span>Definierte Stelle für einen späteren Anschluss.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Planer prüfen Leitungswege, Platz, Höhen, Schächte und Schnittstellen mit anderen Gewerken.</div>
+        <h3>Prüfungsfrage</h3><p><b>Was ist der Unterschied zwischen Rohinstallation und Endmontage?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Leitungen nur dort führen, wo gerade Platz scheint.</div>
+        <div class="memory"><b>Merksatz:</b> Rohinstallation = geplantes Netz wird real.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">19</span><span><b>Innenwände &amp; Vorwandsysteme</b><small>Räume werden gegliedert und Sanitärinstallationen integriert.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Vorwände schaffen Installationsraum für Rohre, Anschlüsse und Befestigungen. Danach verschwinden viele Leitungen hinter der Oberfläche.</div>
+        <h3>Warum?</h3><p>Sanitärapparate brauchen richtige Anschlusshöhen, Befestigungen und genügend Platz.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Nichttragende Innenwände erstellen.</li><li>Vorwandbereiche vorbereiten.</li><li>Montage- und Anschlusspunkte koordinieren.</li><li>Vor dem Schliessen Kontrolle durchführen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Vorwand</b><span>Konstruktion vor einer Wand zur Aufnahme von Installationen.</span></div><div class="term"><b>Montageelement</b><span>Systemelement für Befestigung und Anschluss.</span></div><div class="term"><b>Beplankung</b><span>Plattenförmige Bekleidung einer Unterkonstruktion.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> WC, Waschtisch, Dusche und weitere Apparate brauchen abgestimmte Achsen, Höhen und Tiefen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum ist die Vorwand mehr als nur eine Verkleidung?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Vorwand schliessen, bevor Anschlüsse und Befestigungen kontrolliert sind.</div>
+        <div class="memory"><b>Merksatz:</b> Vorwand versteckt Technik – deshalb vorher kontrollieren.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">20</span><span><b>Bodenaufbau, Abdichtung &amp; Oberflächen</b><small>Aus Rohbauflächen werden fertige Böden und Wände.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Auf dem Rohboden entstehen weitere Schichten. Dadurch ändert sich die endgültige Höhe des fertigen Bodens.</div>
+        <h3>Warum?</h3><p>Sanitäranschlüsse müssen sich auf die richtige Bezugshöhe beziehen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Bodenaufbau herstellen.</li><li>Erforderliche Abdichtungen ausführen.</li><li>Gefällebereiche gemäss Projekt ausbilden.</li><li>Platten und Oberflächen fertigstellen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Rohboden</b><span>Bauliche Rohfläche vor dem fertigen Bodenaufbau.</span></div><div class="term"><b>Fertigboden</b><span>Endgültige nutzbare Bodenoberfläche.</span></div><div class="term"><b>Abdichtung</b><span>Schutzschicht bzw. System gegen unerwünschten Wasserdurchtritt.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Anschlusshöhen dürfen nicht unklar zwischen Rohboden und Fertigboden angegeben werden.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum ist die Bezugshöhe bei Sanitäranschlüssen wichtig?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Rohboden und Fertigboden verwechseln.</div>
+        <div class="memory"><b>Merksatz:</b> Höhe immer mit eindeutiger Bezugsebene angeben.</div>
+      </div>
+    </details><div class="chapter static-chapter">E · Fertigstellung</div>
+    <details class="static-phase" >
+      <summary><span class="num">21</span><span><b>Sanitär-Endmontage</b><small>Sichtbare Apparate und Armaturen werden montiert.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Jetzt werden WC, Waschtisch, Armaturen und weitere sichtbare Teile angeschlossen. Die Anlage wird benutzbar.</div>
+        <h3>Warum?</h3><p>Hier zeigt sich, ob Achsen, Höhen und Platzverhältnisse korrekt geplant waren.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Apparate an vorbereiteten Punkten montieren.</li><li>Armaturen und Anschlüsse herstellen.</li><li>Funktion und Zugänglichkeit kontrollieren.</li><li>Saubere Übergänge zu Oberflächen prüfen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Sanitärapparat</b><span>Ausstattungsobjekt wie WC, Waschtisch oder Dusche.</span></div><div class="term"><b>Armatur</b><span>Bauteil zur Steuerung oder Entnahme von Wasser.</span></div><div class="term"><b>Endmontage</b><span>Montage der sichtbaren, nutzbaren Komponenten.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Die Endmontage ist die sichtbare Bestätigung der vorgängigen Planung.</div>
+        <h3>Prüfungsfrage</h3><p><b>Welche Planungsfehler werden bei der Endmontage oft sichtbar?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Endmontage nur als handwerklichen letzten Schritt betrachten.</div>
+        <div class="memory"><b>Merksatz:</b> Endmontage zeigt, ob die Planung gepasst hat.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">22</span><span><b>Umgebung &amp; Aussenentwässerung</b><small>Aussenflächen und Gelände werden fertiggestellt.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Zum Haus gehört auch die Umgebung. Terrainhöhen und Aussenentwässerung müssen zum Gebäude passen.</div>
+        <h3>Warum?</h3><p>Wasser hört an der Fassade nicht auf. Gebäude und Grundstück bilden ein System.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Terrain und Aussenflächen auf geplante Höhen bringen.</li><li>Entwässerung der Aussenbereiche koordinieren.</li><li>Schächte und Anschlüsse fertigstellen.</li><li>Übergänge zwischen Gebäude und Umgebung kontrollieren.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Aussenentwässerung</b><span>Entwässerung im Aussenbereich.</span></div><div class="term"><b>Terrainhöhe</b><span>Höhe der fertigen Geländeoberfläche.</span></div><div class="term"><b>Schacht</b><span>Zugänglicher Bauteil für Leitungen, Kontrolle oder Anschluss.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Aussenanschlüsse, Schächte und Höhen müssen mit der Gebäudeentwässerung zusammenpassen.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum kann eine Änderung der Terrainhöhe die Entwässerung beeinflussen?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Umgebung und Gebäude getrennt betrachten.</div>
+        <div class="memory"><b>Merksatz:</b> Entwässerung endet nicht an der Fassade.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">23</span><span><b>Prüfung &amp; Inbetriebnahme</b><small>Die Anlage wird kontrolliert, dokumentiert und für den Betrieb vorbereitet.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Eine Anlage ist nicht fertig, nur weil alles montiert ist. Sie muss kontrolliert und sauber dokumentiert werden.</div>
+        <h3>Warum?</h3><p>Die Bauherrschaft braucht eine funktionierende Anlage und Unterlagen, die dem realen Zustand entsprechen.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Ausführung mit Planung und Anforderungen vergleichen.</li><li>Funktion prüfen.</li><li>Änderungen dokumentieren.</li><li>Übergabe und Instruktion vorbereiten.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Inbetriebnahme</b><span>Geordneter Übergang einer Anlage in den vorgesehenen Betrieb.</span></div><div class="term"><b>Kontrolle</b><span>Vergleich von Anforderungen, Planung und Ausführung.</span></div><div class="term"><b>Revisionsunterlagen</b><span>Dokumentation des tatsächlich ausgeführten Zustands.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Der Planer sorgt mit dafür, dass Änderungen nachgeführt und die Anlage nachvollziehbar dokumentiert wird.</div>
+        <h3>Prüfungsfrage</h3><p><b>Was ist der Zweck von Revisionsunterlagen?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Alte Planstände abgeben, obwohl auf der Baustelle Änderungen vorgenommen wurden.</div>
+        <div class="memory"><b>Merksatz:</b> Gebauter Zustand und Dokumentation müssen zusammenpassen.</div>
+      </div>
+    </details>
+    <details class="static-phase" >
+      <summary><span class="num">24</span><span><b>Übergabe &amp; Betrieb</b><small>Das fertige Gebäude geht in die Nutzungsphase.</small></span></summary>
+      <div class="static-detail">
+        <div class="callout good"><strong>Ganz einfach:</strong> Nach der Übergabe beginnt der längste Abschnitt: der Betrieb. Anlagen müssen bedienbar, zugänglich und wartbar sein.</div>
+        <h3>Warum?</h3><p>Gute Planung betrachtet nicht nur die Bauzeit, sondern den ganzen Lebenszyklus.</p>
+        <h3>Schritt für Schritt</h3><ol class="steps"><li>Gebäude und Anlagen übergeben.</li><li>Nutzende bzw. Betreiber instruieren.</li><li>Unterlagen bereitstellen.</li><li>Wartung, Reparatur und spätere Änderungen berücksichtigen.</li></ol>
+        <h3>Fachbegriffe</h3><div class="card compact"><div class="term"><b>Übergabe</b><span>Übergang vom Bauprojekt in die Nutzung.</span></div><div class="term"><b>Betrieb</b><span>Nutzungsphase eines Gebäudes.</span></div><div class="term"><b>Unterhalt</b><span>Massnahmen zur Erhaltung von Funktion und Zustand.</span></div></div>
+        <h3>Sanitärplanung</h3><div class="callout"><strong>Planer-Sicht:</strong> Ventile, Apparate und technische Komponenten müssen so geplant sein, dass sie später erreichbar und wartbar bleiben.</div>
+        <h3>Prüfungsfrage</h3><p><b>Warum endet gute Gebäudetechnikplanung nicht mit der Montage?</b></p>
+        <div class="callout warn"><strong>Typischer Fehler:</strong> Nur bis zur Bauabnahme denken.</div>
+        <div class="memory"><b>Merksatz:</b> Gute Planung denkt Bau, Betrieb und Wartung zusammen.</div>
+      </div>
+    </details></div>
+  </section>
+
+  <section id="begriffe">
+    <h2>Prüfungsbegriffe</h2>
+    <div class="grid">
+      <div class="card s4"><div class="kicker">Horizontale Sicht</div><h3>Grundriss</h3><p>Zeigt Lage und Anordnung eines Geschosses.</p></div><div class="card s4"><div class="kicker">Vertikale Sicht</div><h3>Schnitt</h3><p>Zeigt Höhen, Geschosse und vertikale Beziehungen.</p></div><div class="card s4"><div class="kicker">Sicherer Bezug</div><h3>Fixpunkt</h3><p>Stabiler Bezugspunkt für Lage oder Höhe.</p></div><div class="card s4"><div class="kicker">Plan → Realität</div><h3>Absteckung</h3><p>Überträgt geplante Punkte und Achsen auf das Grundstück.</p></div><div class="card s4"><div class="kicker">Erdarbeiten</div><h3>Aushub</h3><p>Entfernt Erdmaterial für unterirdische Bauteile.</p></div><div class="card s4"><div class="kicker">Lastabtragung</div><h3>Fundation</h3><p>Überträgt Gebäudelasten in den Baugrund.</p></div><div class="card s4"><div class="kicker">Basis</div><h3>Bodenplatte</h3><p>Flächiges Bauteil am Gebäudesockel.</p></div><div class="card s4"><div class="kicker">Vertikale Zone</div><h3>Schacht</h3><p>Führt Installationen über mehrere Geschosse.</p></div><div class="card s4"><div class="kicker">Geplante Öffnung</div><h3>Durchbruch</h3><p>Ermöglicht das Führen von Leitungen durch Bauteile.</p></div><div class="card s4"><div class="kicker">Techniknetz</div><h3>Rohinstallation</h3><p>Leitungen und vorbereitete Anschlusspunkte vor der Endmontage.</p></div><div class="card s4"><div class="kicker">Installationsraum</div><h3>Vorwand</h3><p>Nimmt Leitungen, Befestigungen und Anschlüsse auf.</p></div><div class="card s4"><div class="kicker">Endhöhe</div><h3>Fertigboden</h3><p>Endgültige nutzbare Bodenoberfläche.</p></div><div class="card s4"><div class="kicker">Sichtbare Fertigstellung</div><h3>Endmontage</h3><p>Apparate und Armaturen werden montiert.</p></div><div class="card s4"><div class="kicker">Funktion</div><h3>Inbetriebnahme</h3><p>Anlage wird kontrolliert und betriebsbereit gemacht.</p></div><div class="card s4"><div class="kicker">Gebauter Zustand</div><h3>Revisionsunterlagen</h3><p>Dokumentieren, was tatsächlich ausgeführt wurde.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Prüfungs-Checkliste</h2>
+    <div class="grid">
+      <div class="card s4"><div class="kicker">Lage</div><p>Wo liegt das Bauteil oder die Leitung im Grundriss?</p></div>
+      <div class="card s4"><div class="kicker">Höhe</div><p>Auf welcher Ebene liegt es? Was zeigt der Schnitt?</p></div>
+      <div class="card s4"><div class="kicker">Zeitpunkt</div><p>Muss es vor Beton, vor dem Schliessen oder erst bei der Endmontage fertig sein?</p></div>
+      <div class="card s4"><div class="kicker">Schnittstellen</div><p>Was liegt daneben, darüber oder darunter?</p></div>
+      <div class="card s4"><div class="kicker">Zugänglichkeit</div><p>Kann man montieren, bedienen und später warten?</p></div>
+      <div class="card s4"><div class="kicker">Dokumentation</div><p>Stimmt der dokumentierte mit dem tatsächlich gebauten Zustand überein?</p></div>
+    </div>
+  </section>
+</div>
+</div>
 <div class="bottom"><div class="nav" id="nav"></div></div>
 <script>
 const PHASES = [{"chapter": "A · Planung", "title": "Projektstart & Bedürfnisse", "subtitle": "Was soll gebaut werden – und was muss das Gebäude leisten?", "simple": "Ganz am Anfang wird noch nicht gebaut. Zuerst wird geklärt, wofür das Gebäude gebraucht wird, welche Räume nötig sind und welche technischen Anlagen dazugehören.", "why": "Wer Anforderungen zu spät klärt, muss später Pläne ändern. Das kostet Zeit, Geld und kann zu Konflikten zwischen Architektur, Tragwerk und Gebäudetechnik führen.", "steps": ["Bedürfnisse der Bauherrschaft erfassen: Nutzung, Räume, Komfort und technische Anforderungen.", "Zuständigkeiten zwischen Architektur, Tragwerk und Fachplanungen klären.", "Früh groben Platzbedarf für Technikräume, Schächte und Leitungswege reservieren.", "Offene Punkte dokumentieren und im Projektteam abstimmen."], "terms": [["Bauherrschaft", "Auftraggeberin bzw. Auftraggeber des Bauprojekts."], ["Nutzung", "Art, wie ein Gebäude oder Raum verwendet wird."], ["Schnittstelle", "Punkt, an dem zwei Gewerke oder Bauteile zusammenpassen müssen."]], "sanitary": "Sanitärplanung beginnt nicht erst beim Rohr. Bereits hier wird über Nassräume, Technikraum, Schächte, Wasseranschluss, Entwässerung und Zugänglichkeit nachgedacht.", "exam": "Warum beginnt die Sanitärplanung schon in der frühen Projektphase?", "mistake": "Zu glauben, man könne zuerst Architektur und Rohbau fertig planen und die Leitungen später einfach irgendwo einzeichnen.", "memory": "Erst Anforderungen klären – dann planen – dann bauen.", "stage": 0}, {"chapter": "A · Planung", "title": "Grundstück & Grundlagen", "subtitle": "Terrain, Lage, Zufahrt, Erschliessung und vorhandene Leitungen verstehen.", "simple": "Bevor ein Haus geplant wird, muss man das Grundstück kennen. Wichtig sind die Geländeform, Höhen, Zufahrt und bestehende Anschlüsse.", "why": "Das Grundstück bestimmt, wo das Gebäude stehen kann und wie Wasser, Abwasser und andere Medien zum Gebäude geführt werden.", "steps": ["Grundstücksplan, Lageplan und vorhandene Projektgrundlagen beschaffen.", "Terrain und Höhenverhältnisse beurteilen.", "Zufahrt, Nachbargebäude und mögliche Einschränkungen beachten.", "Vorhandene Werkleitungen und Anschlusspunkte prüfen."], "terms": [["Terrain", "Bestehende oder geplante Geländeoberfläche."], ["Erschliessung", "Anbindung des Grundstücks an Strasse sowie Versorgungs- und Entsorgungsnetze."], ["Werkleitung", "Leitung ausserhalb des Gebäudes, z. B. Wasser oder Abwasser."]], "sanitary": "Für Sanitär sind besonders der Trinkwasseranschluss, der Entwässerungsanschluss und die Höhenlage der Leitungen wichtig.", "exam": "Nenne drei Angaben zum Grundstück, die für die Gebäudetechnik wichtig sind.", "mistake": "Leitungen dort einzeichnen, wo sie praktisch wären, ohne die echten Anschlusslagen zu prüfen.", "memory": "Das Grundstück gibt Lage, Höhe und Anschlusspunkte vor.", "stage": 0}, {"chapter": "A · Planung", "title": "Vermessung & Geometer", "subtitle": "Aus dem realen Grundstück werden verlässliche Lage- und Höhendaten.", "simple": "Der Geometer misst die Wirklichkeit so genau, dass Planung und Bau auf eindeutige Punkte und Höhen bezogen werden können.", "why": "Ein Grundriss kann geometrisch richtig aussehen und trotzdem in der Realität falsch liegen. Verlässliche Fixpunkte verhindern solche Fehler.", "steps": ["Relevante Lagepunkte und Höhen werden vermessen bzw. aus bestehenden Daten übernommen.", "Fixpunkte und Höhenbezüge werden festgelegt.", "Planung arbeitet mit diesen eindeutigen Bezugspunkten.", "Später wird die geplante Gebäudelage auf dem Grundstück abgesteckt."], "terms": [["Fixpunkt", "Stabiler Bezugspunkt für Lage oder Höhe."], ["Höhenkote", "Angabe einer Höhe bezogen auf einen definierten Bezug."], ["Absteckung", "Übertragen geplanter Punkte und Achsen in die Realität."]], "sanitary": "Bei Entwässerungsleitungen sind Höhen besonders wichtig. Eine Leitung kann im Grundriss richtig liegen und trotzdem auf falscher Höhe liegen.", "exam": "Warum braucht ein Sanitärplaner neben dem Grundriss auch Höhenangaben?", "mistake": "Lage und Höhe verwechseln.", "memory": "Grundriss sagt wo – Höhe sagt auf welcher Ebene.", "stage": 0}, {"chapter": "A · Planung", "title": "Vorprojekt & Koordination", "subtitle": "Architektur, Tragwerk und Gebäudetechnik werden räumlich aufeinander abgestimmt.", "simple": "Im Vorprojekt bekommt das Gebäude seine Form. Jetzt wird entschieden, wo Räume, Schächte, Technikbereiche und wichtige Leitungswege liegen.", "why": "Je früher Platzkonflikte erkannt werden, desto einfacher lassen sie sich lösen.", "steps": ["Grundrisse, Schnitte und Ansichten weiterentwickeln.", "Tragwerk und Fachplanungen melden ihren Platzbedarf.", "Technikräume, Schächte und Haupttrassen koordinieren.", "Nassräume und vertikale Leitungsachsen über mehrere Geschosse vergleichen."], "terms": [["Grundriss", "Horizontale Darstellung eines Geschosses."], ["Schnitt", "Vertikale Darstellung durch das Gebäude."], ["Schacht", "Vertikaler Raum für technische Installationen."]], "sanitary": "Übereinander angeordnete Nassräume und gut platzierte Schächte können Leitungswege vereinfachen. Entscheidend ist aber immer die Gesamtkoordination des Projekts.", "exam": "Warum muss man Sanitärräume nicht nur im Grundriss, sondern auch geschossübergreifend betrachten?", "mistake": "Jedes Geschoss getrennt planen.", "memory": "Grundriss + Schnitt + mehrere Geschosse zusammen denken.", "stage": 1}, {"chapter": "A · Planung", "title": "Bewilligung & Ausführungsplanung", "subtitle": "Aus dem Entwurf werden koordinierte Unterlagen für die Realisierung.", "simple": "Bevor gebaut wird, muss die Planung weit genug entwickelt sein. Wichtige Durchbrüche, Anschlüsse und Leitungswege werden festgelegt.", "why": "Was später in Beton, Wänden oder Decken liegt, muss früh bekannt sein.", "steps": ["Projektunterlagen vervollständigen und koordinieren.", "Erforderliche Bewilligungen und projektspezifische Vorgaben berücksichtigen.", "Ausführungspläne erstellen.", "Durchbrüche, Aussparungen, Einlagen und Anschlusspunkte prüfen."], "terms": [["Ausführungsplan", "Plan mit Informationen für die konkrete Bauausführung."], ["Aussparung", "Geplanter freier Bereich in einem Bauteil."], ["Durchbruch", "Geplante Öffnung durch Wand oder Decke."]], "sanitary": "Steigleitungen, Fallleitungen und Hauseinführungen benötigen passende Öffnungen. Diese sollten nicht erst auf der Baustelle spontan entstehen.", "exam": "Warum müssen Durchbrüche vor dem Erstellen eines Bauteils koordiniert werden?", "mistake": "Nachträgliches Bohren als normale Planungsmethode betrachten.", "memory": "Was durch Beton muss, muss vorher bekannt sein.", "stage": 1}, {"chapter": "B · Baustart & Erdarbeiten", "title": "Baustelleneinrichtung", "subtitle": "Die Baustelle wird organisiert, erschlossen und sicher vorbereitet.", "simple": "Bevor der eigentliche Bau beginnt, braucht die Baustelle Zufahrten, Lagerflächen, Geräte, provisorische Anschlüsse und eine klare Organisation.", "why": "Gute Planung funktioniert nur, wenn Materialien und Personen sicher und zur richtigen Zeit an den richtigen Ort kommen.", "steps": ["Zufahrt und Arbeitsbereiche festlegen.", "Lagerflächen und Gerätepositionen planen.", "Provisorische Versorgung und Entsorgung organisieren.", "Sicherheits- und Logistikabläufe abstimmen."], "terms": [["Baustelleneinrichtung", "Temporäre Infrastruktur der Baustelle."], ["Bauinstallation", "Provisorische Einrichtungen für den Baustellenbetrieb."], ["Logistik", "Organisation von Material-, Geräte- und Personenbewegungen."]], "sanitary": "Auch Fachplaner müssen verstehen, ob vorgesehene Komponenten überhaupt transportiert, eingebracht und montiert werden können.", "exam": "Warum kann Baustellenlogistik für die Fachplanung relevant sein?", "mistake": "Nur an den fertigen Zustand denken.", "memory": "Planung muss auch montierbar sein.", "stage": 1}, {"chapter": "B · Baustart & Erdarbeiten", "title": "Absteckung", "subtitle": "Die geplante Gebäudelage wird in die Realität übertragen.", "simple": "Nun wird auf dem Grundstück markiert, wo das Gebäude wirklich stehen soll.", "why": "Der Aushub und alle folgenden Arbeiten brauchen eindeutige Achsen, Ecken und Höhen.", "steps": ["Gebäudeachsen bzw. relevante Punkte aus dem Plan übertragen.", "Kontrollmasse prüfen.", "Höhenbezüge festlegen.", "Ausführung an den Referenzen ausrichten."], "terms": [["Gebäudeachse", "Geometrische Bezugslinie für Planung und Ausführung."], ["Flucht", "Geradlinige Ausrichtung von Bauteilen oder Punkten."], ["Schnurgerüst", "Mögliche Hilfskonstruktion zur Übertragung von Achsen."]], "sanitary": "Hauseinführungen und Aussenleitungen müssen zur tatsächlich abgesteckten Gebäudelage passen.", "exam": "Was bedeutet Absteckung?", "mistake": "Absteckung mit Aushub verwechseln.", "memory": "Abstecken = Plan auf das Grundstück übertragen.", "stage": 1}, {"chapter": "B · Baustart & Erdarbeiten", "title": "Aushub & Baugrube", "subtitle": "Der Boden wird für Untergeschoss, Fundation und unterirdische Leitungen entfernt.", "simple": "Jetzt wird Erdmaterial entfernt. So entsteht der Raum für alles, was unter dem späteren Gelände liegt.", "why": "Ohne Baugrube können Fundation, Keller, Bodenplatte und viele unterirdische Leitungen nicht erstellt werden.", "steps": ["Erdmaterial entsprechend dem Bauablauf abtragen.", "Baugrube auf die vorgesehenen Höhen bringen.", "Baugrube fachgerecht sichern.", "Wasserverhältnisse und Zugänglichkeit berücksichtigen."], "terms": [["Aushub", "Entfernen von Erdmaterial."], ["Baugrube", "Ausgehobener Bereich für unterirdische Bauteile."], ["Baugrubensicherung", "Massnahmen zur Stabilisierung der Baugrube."]], "sanitary": "Grundleitungen und Hauseinführungen werden jetzt besonders wichtig, weil viele davon später kaum noch zugänglich sind.", "exam": "Welche Bauteile und Leitungen werden durch den Aushub überhaupt erst möglich?", "mistake": "Baugrube nur als 'Loch' betrachten und Höhen sowie Sicherung vergessen.", "memory": "Aushub schafft Raum für alles unter Terrain.", "stage": 2}, {"chapter": "B · Baustart & Erdarbeiten", "title": "Planum & Unterbau", "subtitle": "Der Untergrund wird für die tragenden Bauteile vorbereitet.", "simple": "Der Boden der Baugrube wird auf die richtige Höhe und Qualität gebracht, damit darauf weitergebaut werden kann.", "why": "Eine ungenaue oder ungeeignete Grundlage kann spätere Bauteile beeinflussen.", "steps": ["Planum auf Sollhöhe herstellen.", "Untergrund kontrollieren.", "Je nach Konstruktion Unterbau- oder Sauberkeitsschichten herstellen.", "Einlagen und Leitungsdurchführungen erneut koordinieren."], "terms": [["Planum", "Geplante hergestellte Oberfläche des Untergrunds."], ["Unterbau", "Schichten unter dem eigentlichen tragenden Bauteil."], ["Sauberkeitsschicht", "Hilfsschicht für eine saubere, definierte Arbeitsfläche."]], "sanitary": "Alles, was unter der Bodenplatte liegt, muss jetzt eindeutig in Lage und Höhe bekannt sein.", "exam": "Warum ist diese Phase für unterirdische Leitungen kritisch?", "mistake": "Nur die sichtbaren Bauteile des Hauses beachten.", "memory": "Vor der Bodenplatte muss unten alles stimmen.", "stage": 2}, {"chapter": "B · Baustart & Erdarbeiten", "title": "Werkleitungen & Grundleitungen", "subtitle": "Unterirdische Ver- und Entsorgungswege werden hergestellt.", "simple": "Jetzt werden Leitungen gebaut, die später unter dem Gebäude oder im Erdreich liegen.", "why": "Diese Leitungen sind nach Fertigstellung schwer zugänglich. Fehler in Lage oder Höhe sind später aufwendig.", "steps": ["Trassen und Höhen gemäss Planung festlegen.", "Leitungen in koordinierter Lage herstellen.", "Anschlüsse und Gebäudeeinführungen vorbereiten.", "Vor dem Überdecken Lage und Ausführung kontrollieren."], "terms": [["Grundleitung", "Entwässerungsleitung im Erdreich oder unter der Bodenplatte."], ["Hauseinführung", "Stelle, an der eine Versorgung in das Gebäude geführt wird."], ["Trasse", "Geplanter räumlicher Verlauf einer Leitung."]], "sanitary": "Bei Entwässerung muss die Höhenführung funktionieren. Nur die Linie im Grundriss genügt nicht.", "exam": "Warum ist eine falsche Höhe bei einer Grundleitung besonders problematisch?", "mistake": "Lage prüfen, aber Höhe vergessen.", "memory": "Unterirdisch: Lage + Höhe + Anschluss prüfen.", "stage": 3}, {"chapter": "C · Fundation & Rohbau", "title": "Fundation", "subtitle": "Die Lasten des Gebäudes werden sicher in den Baugrund übertragen.", "simple": "Fundamente bilden die Verbindung zwischen Gebäude und Boden. Sie sorgen dafür, dass die Lasten kontrolliert in den Baugrund gelangen.", "why": "Ein Gebäude braucht eine tragfähige Basis.", "steps": ["Fundationsart gemäss Tragwerks- und Baugrundplanung festlegen.", "Schalung und Bewehrung vorbereiten.", "Notwendige Einlagen und Durchführungen koordinieren.", "Betonbauteile herstellen und kontrollieren."], "terms": [["Fundation", "Bauteile zur Übertragung von Gebäudelasten in den Baugrund."], ["Fundament", "Teil der Fundation unter Wänden, Stützen oder anderen Lasten."], ["Bewehrung", "Stahleinlagen im Stahlbeton."]], "sanitary": "Leitungsdurchführungen durch tragende Bereiche dürfen nicht ungeplant erfolgen.", "exam": "Welche Hauptaufgabe hat die Fundation?", "mistake": "Fundament und Bodenplatte immer als dasselbe ansehen.", "memory": "Fundation = Lasten sicher in den Baugrund.", "stage": 4}, {"chapter": "C · Fundation & Rohbau", "title": "Bodenplatte", "subtitle": "Die unterste flächige Ebene des Gebäudes entsteht.", "simple": "Die Bodenplatte bildet die Basis des Gebäudes. Vor dem Betonieren muss geprüft sein, ob alle vorgesehenen Einlagen und Durchführungen richtig liegen.", "why": "Nach dem Betonieren sind Korrekturen viel schwieriger.", "steps": ["Schalung und Bewehrung vorbereiten.", "Einlagen, Hülsen und Durchführungen kontrollieren.", "Anschlusspunkte mit den Fachplanungen vergleichen.", "Betonieren und Bauteil aushärten lassen."], "terms": [["Bodenplatte", "Flächiges Bauteil am Gebäudesockel."], ["Einlage", "Vor dem Betonieren eingebautes Element."], ["Abdichtung", "Schutz gegen unerwünschten Wassereintritt entsprechend Konstruktion."]], "sanitary": "Hauseinführungen, Entwässerungsanschlüsse und geplante Durchführungen müssen an der richtigen Stelle liegen.", "exam": "Was muss vor dem Betonieren aus Sicht Gebäudetechnik kontrolliert werden?", "mistake": "Anschlüsse erst nach dem Betonieren genau festlegen.", "memory": "Vor Beton: Einlagen und Durchführungen kontrollieren.", "stage": 5}, {"chapter": "C · Fundation & Rohbau", "title": "Untergeschoss / Keller", "subtitle": "Technikräume, Wände, Stützen und erste vertikale Leitungszonen entstehen.", "simple": "Der Rohbau wird sichtbar. Im Untergeschoss liegen häufig Technikräume und wichtige Verteilungen.", "why": "Hier treffen viele Systeme zusammen.", "steps": ["Wände und Stützen gemäss Tragwerksplanung erstellen.", "Technikräume und Schächte freihalten.", "Öffnungen und Durchbrüche prüfen.", "Erdberührte Bauteile und Abdichtungen gemäss Konstruktion ausführen."], "terms": [["Tragwand", "Wand, die Lasten aufnimmt."], ["Technikraum", "Raum für gebäudetechnische Anlagen."], ["Installationszone", "Vorgesehener Raum für Leitungen und Komponenten."]], "sanitary": "Technikraum und Schächte brauchen nicht nur Gerätefläche, sondern auch Leitungsanschlüsse, Bedienung und Wartungszugang.", "exam": "Warum darf der Technikraum keine beliebige Restfläche sein?", "mistake": "Nur Geräteabmessungen berücksichtigen.", "memory": "Technik braucht Platz zum Anschliessen, Bedienen und Warten.", "stage": 6}, {"chapter": "C · Fundation & Rohbau", "title": "Wände, Stützen & weitere Geschosse", "subtitle": "Das Gebäude wächst Geschoss für Geschoss.", "simple": "Jetzt werden die tragenden und raumbildenden Bauteile erstellt. Gleichzeitig müssen Installationszonen frei bleiben.", "why": "Leitungen teilen sich den Raum mit Tragwerk, Türen, Decken und anderen Gewerken.", "steps": ["Wände und Stützen nach Achsen erstellen.", "Öffnungen und Installationszonen beachten.", "Leitungswege mit Tragwerk und Architektur vergleichen.", "Geschosse wiederholt miteinander koordinieren."], "terms": [["Rohbau", "Konstruktive Grundstruktur des Gebäudes."], ["Stütze", "Vertikales tragendes Bauteil."], ["Kollision", "Räumlicher Konflikt zwischen zwei Bauteilen oder Systemen."]], "sanitary": "Ein Rohr kann im Grundriss passen und trotzdem mit einem Unterzug, einer Stütze oder einer Tür kollidieren.", "exam": "Nenne zwei typische Konflikte zwischen Sanitärinstallation und Rohbau.", "mistake": "Nur zweidimensional planen.", "memory": "Leitung immer räumlich prüfen: X, Y und Höhe.", "stage": 7}, {"chapter": "C · Fundation & Rohbau", "title": "Geschossdecken", "subtitle": "Horizontale Tragflächen verbinden die Geschosse.", "simple": "Decken trennen Geschosse. Für vertikale Leitungen müssen passende Öffnungen vorhanden sein.", "why": "Fehler bei Deckendurchbrüchen können sich über mehrere Geschosse fortsetzen.", "steps": ["Schalung und Bewehrung vorbereiten.", "Durchbrüche, Aussparungen und Einlagen kontrollieren.", "Vertikale Leitungsachsen über mehrere Geschosse vergleichen.", "Decke erstellen und Öffnungen für die nächsten Schritte sichern."], "terms": [["Decke", "Horizontales Bauteil zwischen Geschossen."], ["Deckendurchbruch", "Geplante Öffnung durch die Decke."], ["Schalung", "Temporäre Form für Frischbeton."]], "sanitary": "Fallleitungen und Steigleitungen brauchen durchgehende, koordinierte Vertikalzonen.", "exam": "Warum muss eine Fallleitung über mehrere Geschosse kontrolliert werden?", "mistake": "Geschossweise isoliert planen.", "memory": "Vertikale Leitung = alle Geschosse gemeinsam prüfen.", "stage": 8}, {"chapter": "C · Fundation & Rohbau", "title": "Dach", "subtitle": "Das Gebäude erhält seinen oberen Abschluss.", "simple": "Das Dach schützt das Gebäude. Gleichzeitig muss Niederschlagswasser kontrolliert abgeführt werden.", "why": "Dach und Gebäudetechnik haben direkte Schnittstellen.", "steps": ["Dachtragwerk erstellen.", "Dachaufbau ausführen.", "Durchdringungen koordinieren.", "Dachentwässerung und Anschlüsse berücksichtigen."], "terms": [["Dachentwässerung", "System zur Ableitung von Niederschlagswasser."], ["Dachdurchdringung", "Öffnung durch Dachschichten."], ["Gefälle", "Höhenänderung über eine Strecke."]], "sanitary": "Regenwasserleitungen und Lüftungsführungen über Dach sind typische Sanitärschnittstellen.", "exam": "Welche Sanitärsysteme können das Dach direkt betreffen?", "mistake": "Das Dach nur als Thema von Zimmermann oder Dachdecker betrachten.", "memory": "Auch das Dach hat Sanitärschnittstellen.", "stage": 9}, {"chapter": "D · Gebäudehülle & Ausbau", "title": "Fenster, Fassade & Gebäudehülle", "subtitle": "Das Gebäude wird gegen Aussen geschlossen.", "simple": "Fenster, Fassade und weitere Schichten trennen Innen und Aussen. Durchdringungen müssen sorgfältig geplant sein.", "why": "Die Hülle soll Witterung fernhalten und bauphysikalisch funktionieren.", "steps": ["Fenster und Aussentüren einbauen.", "Fassaden- und Dämmschichten ergänzen.", "Anschlussdetails ausbilden.", "Technische Durchdringungen mit der Hülle koordinieren."], "terms": [["Gebäudehülle", "Bauteile, die Innenräume gegen aussen abgrenzen."], ["Wärmedämmung", "Schicht zur Verringerung des Wärmedurchgangs."], ["Anschlussdetail", "Konstruktive Verbindung zwischen verschiedenen Bauteilen."]], "sanitary": "Leitungsdurchführungen durch die Gebäudehülle müssen mit Abdichtung und Bauphysik zusammenpassen.", "exam": "Warum sind Durchdringungen durch die Gebäudehülle sensibel?", "mistake": "Nur das Rohr, nicht die Hülle betrachten.", "memory": "Durchdringung = Leitung + dichter Bauanschluss.", "stage": 10}, {"chapter": "D · Gebäudehülle & Ausbau", "title": "Rohinstallation Gebäudetechnik", "subtitle": "Leitungsnetze werden im Rohbau realisiert.", "simple": "Jetzt werden die geplanten Leitungswege tatsächlich gebaut. Die Installation ist noch nicht fertig sichtbar, aber das technische Netz entsteht.", "why": "Hier zeigt sich, ob Planung und Rohbau wirklich zusammenpassen.", "steps": ["Haupttrassen und Steigzonen umsetzen.", "Kaltwasser, Warmwasser, Entwässerung und weitere Systeme koordinieren.", "Anschlusspunkte für Apparate vorbereiten.", "Abweichungen zwischen Planung und Baustelle klären."], "terms": [["Steigzone", "Vertikaler Installationsbereich."], ["Rohinstallation", "Leitungen und technische Komponenten vor der Endmontage."], ["Anschlusspunkt", "Definierte Stelle für einen späteren Anschluss."]], "sanitary": "Planer prüfen Leitungswege, Platz, Höhen, Schächte und Schnittstellen mit anderen Gewerken.", "exam": "Was ist der Unterschied zwischen Rohinstallation und Endmontage?", "mistake": "Leitungen nur dort führen, wo gerade Platz scheint.", "memory": "Rohinstallation = geplantes Netz wird real.", "stage": 11}, {"chapter": "D · Gebäudehülle & Ausbau", "title": "Innenwände & Vorwandsysteme", "subtitle": "Räume werden gegliedert und Sanitärinstallationen integriert.", "simple": "Vorwände schaffen Installationsraum für Rohre, Anschlüsse und Befestigungen. Danach verschwinden viele Leitungen hinter der Oberfläche.", "why": "Sanitärapparate brauchen richtige Anschlusshöhen, Befestigungen und genügend Platz.", "steps": ["Nichttragende Innenwände erstellen.", "Vorwandbereiche vorbereiten.", "Montage- und Anschlusspunkte koordinieren.", "Vor dem Schliessen Kontrolle durchführen."], "terms": [["Vorwand", "Konstruktion vor einer Wand zur Aufnahme von Installationen."], ["Montageelement", "Systemelement für Befestigung und Anschluss."], ["Beplankung", "Plattenförmige Bekleidung einer Unterkonstruktion."]], "sanitary": "WC, Waschtisch, Dusche und weitere Apparate brauchen abgestimmte Achsen, Höhen und Tiefen.", "exam": "Warum ist die Vorwand mehr als nur eine Verkleidung?", "mistake": "Vorwand schliessen, bevor Anschlüsse und Befestigungen kontrolliert sind.", "memory": "Vorwand versteckt Technik – deshalb vorher kontrollieren.", "stage": 12}, {"chapter": "D · Gebäudehülle & Ausbau", "title": "Bodenaufbau, Abdichtung & Oberflächen", "subtitle": "Aus Rohbauflächen werden fertige Böden und Wände.", "simple": "Auf dem Rohboden entstehen weitere Schichten. Dadurch ändert sich die endgültige Höhe des fertigen Bodens.", "why": "Sanitäranschlüsse müssen sich auf die richtige Bezugshöhe beziehen.", "steps": ["Bodenaufbau herstellen.", "Erforderliche Abdichtungen ausführen.", "Gefällebereiche gemäss Projekt ausbilden.", "Platten und Oberflächen fertigstellen."], "terms": [["Rohboden", "Bauliche Rohfläche vor dem fertigen Bodenaufbau."], ["Fertigboden", "Endgültige nutzbare Bodenoberfläche."], ["Abdichtung", "Schutzschicht bzw. System gegen unerwünschten Wasserdurchtritt."]], "sanitary": "Anschlusshöhen dürfen nicht unklar zwischen Rohboden und Fertigboden angegeben werden.", "exam": "Warum ist die Bezugshöhe bei Sanitäranschlüssen wichtig?", "mistake": "Rohboden und Fertigboden verwechseln.", "memory": "Höhe immer mit eindeutiger Bezugsebene angeben.", "stage": 13}, {"chapter": "E · Fertigstellung", "title": "Sanitär-Endmontage", "subtitle": "Sichtbare Apparate und Armaturen werden montiert.", "simple": "Jetzt werden WC, Waschtisch, Armaturen und weitere sichtbare Teile angeschlossen. Die Anlage wird benutzbar.", "why": "Hier zeigt sich, ob Achsen, Höhen und Platzverhältnisse korrekt geplant waren.", "steps": ["Apparate an vorbereiteten Punkten montieren.", "Armaturen und Anschlüsse herstellen.", "Funktion und Zugänglichkeit kontrollieren.", "Saubere Übergänge zu Oberflächen prüfen."], "terms": [["Sanitärapparat", "Ausstattungsobjekt wie WC, Waschtisch oder Dusche."], ["Armatur", "Bauteil zur Steuerung oder Entnahme von Wasser."], ["Endmontage", "Montage der sichtbaren, nutzbaren Komponenten."]], "sanitary": "Die Endmontage ist die sichtbare Bestätigung der vorgängigen Planung.", "exam": "Welche Planungsfehler werden bei der Endmontage oft sichtbar?", "mistake": "Endmontage nur als handwerklichen letzten Schritt betrachten.", "memory": "Endmontage zeigt, ob die Planung gepasst hat.", "stage": 14}, {"chapter": "E · Fertigstellung", "title": "Umgebung & Aussenentwässerung", "subtitle": "Aussenflächen und Gelände werden fertiggestellt.", "simple": "Zum Haus gehört auch die Umgebung. Terrainhöhen und Aussenentwässerung müssen zum Gebäude passen.", "why": "Wasser hört an der Fassade nicht auf. Gebäude und Grundstück bilden ein System.", "steps": ["Terrain und Aussenflächen auf geplante Höhen bringen.", "Entwässerung der Aussenbereiche koordinieren.", "Schächte und Anschlüsse fertigstellen.", "Übergänge zwischen Gebäude und Umgebung kontrollieren."], "terms": [["Aussenentwässerung", "Entwässerung im Aussenbereich."], ["Terrainhöhe", "Höhe der fertigen Geländeoberfläche."], ["Schacht", "Zugänglicher Bauteil für Leitungen, Kontrolle oder Anschluss."]], "sanitary": "Aussenanschlüsse, Schächte und Höhen müssen mit der Gebäudeentwässerung zusammenpassen.", "exam": "Warum kann eine Änderung der Terrainhöhe die Entwässerung beeinflussen?", "mistake": "Umgebung und Gebäude getrennt betrachten.", "memory": "Entwässerung endet nicht an der Fassade.", "stage": 15}, {"chapter": "E · Fertigstellung", "title": "Prüfung & Inbetriebnahme", "subtitle": "Die Anlage wird kontrolliert, dokumentiert und für den Betrieb vorbereitet.", "simple": "Eine Anlage ist nicht fertig, nur weil alles montiert ist. Sie muss kontrolliert und sauber dokumentiert werden.", "why": "Die Bauherrschaft braucht eine funktionierende Anlage und Unterlagen, die dem realen Zustand entsprechen.", "steps": ["Ausführung mit Planung und Anforderungen vergleichen.", "Funktion prüfen.", "Änderungen dokumentieren.", "Übergabe und Instruktion vorbereiten."], "terms": [["Inbetriebnahme", "Geordneter Übergang einer Anlage in den vorgesehenen Betrieb."], ["Kontrolle", "Vergleich von Anforderungen, Planung und Ausführung."], ["Revisionsunterlagen", "Dokumentation des tatsächlich ausgeführten Zustands."]], "sanitary": "Der Planer sorgt mit dafür, dass Änderungen nachgeführt und die Anlage nachvollziehbar dokumentiert wird.", "exam": "Was ist der Zweck von Revisionsunterlagen?", "mistake": "Alte Planstände abgeben, obwohl auf der Baustelle Änderungen vorgenommen wurden.", "memory": "Gebauter Zustand und Dokumentation müssen zusammenpassen.", "stage": 16}, {"chapter": "E · Fertigstellung", "title": "Übergabe & Betrieb", "subtitle": "Das fertige Gebäude geht in die Nutzungsphase.", "simple": "Nach der Übergabe beginnt der längste Abschnitt: der Betrieb. Anlagen müssen bedienbar, zugänglich und wartbar sein.", "why": "Gute Planung betrachtet nicht nur die Bauzeit, sondern den ganzen Lebenszyklus.", "steps": ["Gebäude und Anlagen übergeben.", "Nutzende bzw. Betreiber instruieren.", "Unterlagen bereitstellen.", "Wartung, Reparatur und spätere Änderungen berücksichtigen."], "terms": [["Übergabe", "Übergang vom Bauprojekt in die Nutzung."], ["Betrieb", "Nutzungsphase eines Gebäudes."], ["Unterhalt", "Massnahmen zur Erhaltung von Funktion und Zustand."]], "sanitary": "Ventile, Apparate und technische Komponenten müssen so geplant sein, dass sie später erreichbar und wartbar bleiben.", "exam": "Warum endet gute Gebäudetechnikplanung nicht mit der Montage?", "mistake": "Nur bis zur Bauabnahme denken.", "memory": "Gute Planung denkt Bau, Betrieb und Wartung zusammen.", "stage": 16}];
@@ -300,7 +725,13 @@ function sceneSVG(stage,systems){
  </svg>`;
 }
 
-home();nav();
+try{
+  home();nav();
+  document.documentElement.classList.add("js-ready");
+}catch(err){
+  console.error(err);
+  document.documentElement.classList.remove("js-ready");
+}
 </script>
 </body>
 </html>
