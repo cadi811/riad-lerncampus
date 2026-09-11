@@ -1,4 +1,4 @@
-const CACHE='hausbau-fab21fb3ebb8';
+const CACHE='hausbau-961ce4132b3e';
 
 const ASSETS=['./','./index.html','./icon.svg','./apple-touch-icon.png','./icon-192.png','./icon-512.png','./manifest.webmanifest'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
